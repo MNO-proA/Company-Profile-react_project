@@ -1,7 +1,6 @@
 import React from "react";
-import EditEmployee from "./EditEmployee";
 
-const Employee = ({ name, role, img, id, updateEmployee }) => {
+const Employee = ({ editEmployee, name, role, img }) => {
   return (
     <div className="min-w-[350px] max-w-[350px] m-2 py-8 px-8 bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
       <img
@@ -14,12 +13,7 @@ const Employee = ({ name, role, img, id, updateEmployee }) => {
           <p className="text-lg text-black font-semibold">{name}</p>
           <p className="text-slate-500 font-medium">{role}</p>
         </div>
-        <EditEmployee
-          name={name}
-          role={role}
-          id={id}
-          updateEmployee={updateEmployee}
-        />
+        {editEmployee}
       </div>
     </div>
   );
