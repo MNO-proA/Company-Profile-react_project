@@ -1,3 +1,3 @@
 export default function Customer() {
-  return <p>Hello There</p>;
+  return <h1>Hello There</h1>;
 }

@@ -6,14 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Header>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Header>
         <Routes>
           <Route path="/employee" element={<Employees />} />
           <Route path="/customer" element={<Customer />} />
         </Routes>
-      </BrowserRouter>
-    </Header>
+      </Header>
+    </BrowserRouter>
   );
 }
 export default App;
