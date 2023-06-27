@@ -1,62 +1,34 @@
-import { useState, useEffect, useNavigate } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-export default function Customer() {
-  const [customers, setCustomers] = useState();
-  const [error, setError] = useState(false);
-  const [notFound, setNotFound] = useState(false);
+const Customer = () => {
+  const [customer, setCustomer] = useState();
+  let { id } = useParams();
 
   useEffect(() => {
-    const url = `http://127.0.0.1:8000/api/customers/`;
-    // const url = "https://httpstat.us/50";
+    const url = `http://127.0.0.1:8000/api/customers/${id}`;
     fetch(url)
       .then((response) => {
-        if (response.status === 404) {
-          setNotFound(true);
-        } else if (response.status === 500) {
-          setError(true);
-        } else if (!response.ok) {
-          setError(true);
-          throw new Error("Something went wrong, try again");
-        } else {
-          return response.json();
-        }
+        return response.json();
       })
       .then((data) => {
-        if (data !== undefined) {
-          setCustomers(data.customers);
-        }
-      })
-      .catch((e) => {
-        console.log(e.message);
+        setCustomer(data.customer);
       });
-  }, []);
-
-  if (notFound === true) {
-    return (
-      <>
-        <p>Page not found</p>
-      </>
-    );
-  }
-  if (error === true) {
-    return (
-      <>
-        <p>Something went wrong. Try again later</p>
-      </>
-    );
-  }
+  }, [id]);
 
   return (
     <>
-      {customers ? (
-        <>
-          <h1>Here is a definition: </h1>
-          {customers.map((customer) => {
-            return <p key={uuidv4()}>{customer.name}</p>;
-          })}
-        </>
+      {customer ? (
+        <div>
+          <p>{customer.id}</p>
+          <p>{customer.name}</p>
+          <p>{customer.industry}</p>
+        </div>
       ) : null}
+      <Link to={"/customers"}>Go back</Link>
     </>
   );
-}
+};
+
+export default Customer;

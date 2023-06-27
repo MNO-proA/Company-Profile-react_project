@@ -1,6 +1,7 @@
 import Dictionary from "./pages/Dictionary";
 import Header from "./components/Header";
 import "./index.css";
+import Customers from "./pages/Customers";
 import Customer from "./pages/Customer";
 import Definition from "./pages/Definition";
 import Employees from "./pages/Employees";
@@ -13,7 +14,8 @@ function App() {
       <Header>
         <Routes>
           <Route path="/employee" element={<Employees />} />
-          <Route path="/customer" element={<Customer />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/customer/:id" element={<Customer />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/dictionary/:search" element={<Definition />} />
           <Route path="/404" element={<NotFound />} />
