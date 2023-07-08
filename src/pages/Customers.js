@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import NotFound from "../components/NotFound";
+import { baseUrl } from "../shared";
 
 export default function Customers() {
   const [customers, setCustomers] = useState();
@@ -8,7 +10,7 @@ export default function Customers() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const url = `http://127.0.0.1:8000/api/customers/`;
+    const url = `${baseUrl}/api/customers/`;
     // const url = "https://httpstat.us/50";
     fetch(url)
       .then((response) => {
@@ -34,11 +36,7 @@ export default function Customers() {
   }, []);
 
   if (notFound === true) {
-    return (
-      <>
-        <p>Page not found</p>
-      </>
-    );
+    return <NotFound />;
   }
   if (error === true) {
     return (
